@@ -103,11 +103,37 @@ As you can see in our regex for matching an email there are a few bracket expres
 
 ### Greedy and Lazy Match
 
+Greedy match means that you can match as many characters as possible. For example, `/a.*a/` would match any character that comes between two letter `a`'s. 
+
+Lazy match makes it so that it matches as few characters as possible. By adding a question mark to the greedy match, you can make the previous regex a lazy match instead, `/a.*?a/`.
+
+Take the following string as an example input string, `greedy match can be dangerous`. Greedy match would match between, `atch can be da` because that is between the first and last `a`. Whereas lazy match would match between, `atch ca` because it matches between the first set of `a`'s.
+
 ### Boundaries
+
+Boundry matchers are useful in order to find a particular word if it appears at the beginning or end of a word.
+* `\b` Word boundary, matches the end of a word
+```
+/[a-z]\b/g
+```
+The above regex would match the last letter of each word in a given string.
+* `\B` Non-word Boundary, matches any characters at the beginning of a word
+```
+/[a-z]*\B/g
+```
+The above regex would match the whole beginning of a word until the last letter.
 
 ### Back-references
 
+Back references identify a previously matched group and looks for the same text again. 
+
 ### Look-ahead and Look-behind
+
+* `foo(?=bar)` Lookahead, asserts that the given subpattern can be matched without consuming the characters
+`foobar foobaz` would match just the `foo` before `foobar`.
+
+* `(?<=foo)bar` Lookbehind, ensures that the given pattern will match, ending at the curent position in the expression
+`foobar fuubar` would match just the `bar` after `foobar`.
 
 ## Author
 
